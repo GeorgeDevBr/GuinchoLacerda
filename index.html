@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão Financeira</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Sistema de Gestão Financeira</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#transacoes">Transações</a></li>
+            <li><a href="#solicitacao-guincho">Solicitação de Guincho</a></li>
+            <li><a href="#relatorios">Relatórios</a></li>
+            <li><a href="#configuracoes">Configurações</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <p>Visão geral das finanças.</p>
+        </section>
+        <section id="transacoes">
+            <h2>Registro de Transações</h2>
+            <form>
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao">
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" name="valor">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo">
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+                <button type="submit">Registrar</button>
+            </form>
+        </section>
+        <section id="solicitacao-guincho">
+            <h2>Solicitação de Guincho</h2>
+            <form>
+                <label for="guincho">Selecionar Guincho:</label>
+                <select id="guincho" name="guincho" onchange="atualizarCampos()">
+                    <option value="">Selecione um guincho</option>
+                    <option value="guincho1">Guincho 1</option>
+                    <option value="guincho2">Guincho 2</option>
+                </select>
+                <div id="dados-guincho" style="display:none;">
+                    <label for="motorista">Motorista:</label>
+                    <input type="text" id="motorista" name="motorista" readonly>
+                    <label for="placa">Placa:</label>
+                    <input type="text" id="placa" name="placa" readonly>
+                    <label for="saida">Hora de saída:</label>
+                    <input type="time" id="saida" name="saida">
+                    <label for="pagamento">Foi pago?</label>
+                    <select id="pagamento" name="pagamento">
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim</option>
+                    </select>
+                    <label for="metodo">Método de Pagamento:</label>
+                    <select id="metodo" name="metodo">
+                        <option value="">Selecione</option>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="cartao">Cartão</option>
+                        <option value="pix">Pix</option>
+                    </select>
+                    <label for="tipo-guinchamento">Tipo de Guincho:</label>
+                    <select id="tipo-guinchamento" name="tipo-guinchamento" onchange="mostrarProtocolo()">
+                        <option value="particular">Particular</option>
+                        <option value="seguradora">Seguradora</option>
+                    </select>
+                    <div id="protocolo-field" style="display:none;">
+                        <label for="protocolo">Protocolo:</label>
+                        <input type="text" id="protocolo" name="protocolo">
+                    </div>
+                </div>
+                <button type="submit">Solicitar Guincho</button>
+            </form>
+        </section>
+        <section id="status-transacoes">
+            <h2>Status das Transações do Dia</h2>
+            <ul id="lista-status">
+                <li>Transação 1 - Em andamento</li>
+                <li>Transação 2 - Concluída</li>
+                <li>Transação 3 - Aguardando pagamento</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Lacerda Guinchos</p>
+    </footer>
+    <script>
+        function atualizarCampos() {
+            var guinchoSelecionado = document.getElementById("guincho").value;
+            var dadosGuincho = document.getElementById("dados-guincho");
+            if (guinchoSelecionado) {
+                dadosGuincho.style.display = "block";
+                document.getElementById("motorista").value = "João Silva";
+                document.getElementById("placa").value = "ABC-1234";
+            } else {
+                dadosGuincho.style.display = "none";
+            }
+        }
+        function mostrarProtocolo() {
+            var tipoGuinchamento = document.getElementById("tipo-guinchamento").value;
+            var protocoloField = document.getElementById("protocolo-field");
+            protocoloField.style.display = tipoGuinchamento === "seguradora" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
