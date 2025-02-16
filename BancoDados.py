@@ -1,5 +1,6 @@
 import sqlite3
 from typing import List, Union, Optional, Dict, Tuple
+import os
 
 class BancoDados:
     """
@@ -8,9 +9,11 @@ class BancoDados:
     """
     def __init__(self, nome_banco: str = "gestao_guinchos.db"):
         try:
+            banco_existe = os.path.exists(nome_banco)
             self.conexao = sqlite3.connect(nome_banco)
             self.cursor = self.conexao.cursor()
-            self.criar_tabelas()
+            if not banco_existe:
+                self.criar_tabelas()
         except Exception as e:
             print(f"Erro ao conectar ao banco de dados: {e}")
 

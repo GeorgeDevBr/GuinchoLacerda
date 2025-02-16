@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anexos</title>
+    <script>
+        function filtrarAnexos() {
+            const input = document.getElementById('pesquisa');
+            const filter = input.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                let match = false;
+                cells.forEach(cell => {
+                    if (cell.textContent.toLowerCase().includes(filter)) {
+                        match = true;
+                    }
+                });
+                row.style.display = match ? '' : 'none';
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Anexos</h1>
+    <input type="text" id="pesquisa" onkeyup="filtrarAnexos()" placeholder="Pesquisar anexos...">
+    <form action="/upload_anexos" method="post" enctype="multipart/form-data">
+        <label for="transacao_id">Transação ID:</label>
+        <input type="number" id="transacao_id" name="transacao_id" required>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="atestado">Atestado</option>
+            <option value="comprovante_guinchamento">Comprovante de Guincho</option>
+            <option value="nota_fiscal">Nota Fiscal</option>
+        </select>
+        <label for="anexos">Anexos:</label>
+        <input type="file" id="anexos" name="anexos[]" multiple required>
+        <button type="submit">Enviar</button>
+    </form>
+    <table border="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Transação ID</th>
+                <th>Caminho</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Exemplo de linha de anexo -->
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>/caminho/para/anexo.pdf</td>
+                <td>comprovante_guinchamento</td>
+            </tr>
+            <!-- Mais linhas de anexos aqui -->
+        </tbody>
+    </table>
+</body>
+</html>

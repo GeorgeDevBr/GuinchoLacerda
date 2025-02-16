@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Serviços de Guincho</title>
+</head>
+<body>
+    <h1>Cadastro de Serviços de Guincho</h1>
+    <form action="/cadastrar_servico_guincho" method="post">
+        <label for="data_solicitacao">Data da Solicitação:</label>
+        <input type="datetime-local" id="data_solicitacao" name="data_solicitacao" required><br>
+        <label for="guincho_id">ID do Guincho:</label>
+        <input type="number" id="guincho_id" name="guincho_id" required><br>
+        <label for="tipo_solicitacao">Tipo de Solicitação:</label>
+        <select id="tipo_solicitacao" name="tipo_solicitacao" required>
+            <option value="Particular">Particular</option>
+            <option value="Seguradora">Seguradora</option>
+        </select><br>
+        <label for="protocolo">Protocolo:</label>
+        <input type="text" id="protocolo" name="protocolo"><br>
+        <label for="origem">Origem:</label>
+        <input type="text" id="origem" name="origem" required><br>
+        <label for="destino">Destino:</label>
+        <input type="text" id="destino" name="destino" required><br>
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Finalizado">Finalizado</option>
+            <option value="Cancelado">Cancelado</option>
+        </select><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

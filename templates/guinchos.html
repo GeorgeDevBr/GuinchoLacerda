@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Guinchos</title>
+    <script>
+        function filtrarGuinchos() {
+            const input = document.getElementById('pesquisa');
+            const filter = input.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                let match = false;
+                cells.forEach(cell => {
+                    if (cell.textContent.toLowerCase().includes(filter)) {
+                        match = true;
+                    }
+                });
+                row.style.display = match ? '' : 'none';
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="display: flex;">
+        <div style="width: 50%;">
+            <h1>Cadastrar Guincho</h1>
+            <form action="/cadastrar_guincho" method="post">
+                <label for="placa">Placa:</label>
+                <input type="text" id="placa" name="placa" required><br>
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required><br>
+                <label for="motorista_id">Motorista ID:</label>
+                <input type="number" id="motorista_id" name="motorista_id"><br>
+                <label for="secretaria_id">Secretaria ID:</label>
+                <input type="number" id="secretaria_id" name="secretaria_id" required><br>
+                <label for="disponivel">Disponível:</label>
+                <select id="disponivel" name="disponivel" required>
+                    <option value="1">Sim</option>
+                    <option value="0">Não</option>
+                </select><br>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+        <div style="width: 50%;">
+            <h1>Guinchos</h1>
+            <input type="text" id="pesquisa" onkeyup="filtrarGuinchos()" placeholder="Pesquisar guinchos...">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Motorista ID</th>
+                        <th>Secretaria ID</th>
+                        <th>Disponível</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemplo de linha de guincho -->
+                    <tr>
+                        <td>1</td>
+                        <td>ABC-1234</td>
+                        <td>Modelo X</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>Sim</td>
+                    </tr>
+                    <!-- Mais linhas de guinchos aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
