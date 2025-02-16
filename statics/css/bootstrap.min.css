@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8; /* Azul claro */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 50%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
+
+button {
+    margin-top: 10px;
+    background-color: #6f42c1; /* Roxo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #563d7c; /* Roxo escuro */
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"], input[type="datetime-local"], select, textarea {
+    width: 100%;
+    padding: 1px;
+    margin: 1px 1 1px 1;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="number"]:focus, input[type="datetime-local"]:focus, select:focus, textarea:focus {
+    border: 1px solid #007bff; /* Azul */
+    outline: none;
+}

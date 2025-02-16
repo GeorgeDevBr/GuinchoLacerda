@@ -3,60 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../statics/css/bootstrap.min.css">
     <title>Anexos</title>
-    <script>
-        function filtrarAnexos() {
-            const input = document.getElementById('pesquisa');
-            const filter = input.value.toLowerCase();
-            const rows = document.querySelectorAll('table tbody tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                let match = false;
-                cells.forEach(cell => {
-                    if (cell.textContent.toLowerCase().includes(filter)) {
-                        match = true;
-                    }
-                });
-                row.style.display = match ? '' : 'none';
-            });
-        }
-    </script>
 </head>
 <body>
-    <h1>Anexos</h1>
-    <input type="text" id="pesquisa" onkeyup="filtrarAnexos()" placeholder="Pesquisar anexos...">
-    <form action="/upload_anexos" method="post" enctype="multipart/form-data">
-        <label for="transacao_id">Transação ID:</label>
-        <input type="number" id="transacao_id" name="transacao_id" required>
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo" required>
-            <option value="atestado">Atestado</option>
-            <option value="comprovante_guinchamento">Comprovante de Guincho</option>
-            <option value="nota_fiscal">Nota Fiscal</option>
-        </select>
-        <label for="anexos">Anexos:</label>
-        <input type="file" id="anexos" name="anexos[]" multiple required>
-        <button type="submit">Enviar</button>
-    </form>
-    <table border="0">
-        <thead>
+    <div class="container">
+        <h1>Anexos</h1>
+        <table class="table">
             <tr>
-                <th>ID</th>
-                <th>Transação ID</th>
-                <th>Caminho</th>
-                <th>Tipo</th>
+                <td><label for="transacao_id">Transação ID:</label></td>
+                <td><input type="number" id="transacao_id" name="transacao_id" required></td>
             </tr>
-        </thead>
-        <tbody>
-            <!-- Exemplo de linha de anexo -->
             <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>/caminho/para/anexo.pdf</td>
-                <td>comprovante_guinchamento</td>
+                <td><label for="tipo">Tipo:</label></td>
+                <td>
+                    <select id="tipo" name="tipo" required>
+                        <option value="atestado">Atestado</option>
+                        <option value="comprovante_guinchamento">Comprovante de Guincho</option>
+                        <option value="nota_fiscal">Nota Fiscal</option>
+                    </select>
+                </td>
             </tr>
-            <!-- Mais linhas de anexos aqui -->
-        </tbody>
-    </table>
+            <tr>
+                <td><label for="anexos">Anexos:</label></td>
+                <td><input type="file" id="anexos" name="anexos[]" multiple required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Enviar</button></td>
+            </tr>
+        </table>
+        <form action="/upload_anexos" method="post" enctype="multipart/form-data">
+            
+        </form>
+        <table>
+            <tr>
+                <td><h1>Buscar</h1></td>
+                <td><input type="text" id="pesquisa" onkeyup="filtrarAnexos()" placeholder="Pesquisar anexos...">    </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Transação ID</th>
+                    <th>Caminho</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de linha de anexo -->
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>/caminho/para/anexo.pdf</td>
+                    <td>comprovante_guinchamento</td>
+                </tr>
+                <!-- Mais linhas de anexos aqui -->
+            </tbody>
+        </table>
+    </div>
+    <script src="../statics/js/anexos.js"></script>
+    <script src="../statics/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

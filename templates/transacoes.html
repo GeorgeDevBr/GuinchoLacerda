@@ -2,99 +2,94 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../statics/css/bootstrap.min.css">
     <title>Transações</title>
-    <script>
-        function filtrarTransacoes() {
-            const input = document.getElementById('pesquisa');
-            const filter = input.value.toLowerCase();
-            const rows = document.querySelectorAll('table tbody tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                let match = false;
-                cells.forEach(cell => {
-                    if (cell.textContent.toLowerCase().includes(filter)) {
-                        match = true;
-                    }
-                });
-                row.style.display = match ? '' : 'none';
-            });
-        }
-    </script>
 </head>
 <body>
-    <div style="display: flex;">
-        <div style="width: 50%;">
-            <h1>Cadastrar Transação</h1>
-            <form action="/cadastrar_transacao" method="post">
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required><br>
-                <label for="valor">Valor:</label>
-                <input type="number" id="valor" name="valor" step="0.01" required><br>
-                <label for="categoria">Categoria:</label>
-                <input type="text" id="categoria" name="categoria" required><br>
-                <label for="descricao">Descrição:</label>
-                <textarea id="descricao" name="descricao" required></textarea><br>
-                <label for="metodo_pagamento">Método de Pagamento:</label>
-                <select id="metodo_pagamento" name="metodo_pagamento" required>
-                    <option value="Pix">Pix</option>
-                    <option value="Cartão">Cartão</option>
-                    <option value="Dinheiro">Dinheiro</option>
-                </select><br>
-                <label for="recebedor_id">Recebedor ID:</label>
-                <input type="number" id="recebedor_id" name="recebedor_id" required><br>
-                <label for="secretaria_id">Secretaria ID:</label>
-                <input type="number" id="secretaria_id" name="secretaria_id"><br>
-                <label for="guincho_id">Guincho ID:</label>
-                <input type="number" id="guincho_id" name="guincho_id"><br>
-                <label for="motorista_id">Motorista ID:</label>
-                <input type="number" id="motorista_id" name="motorista_id"><br>
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                    <option value="Pago">Pago</option>
-                    <option value="Pendente">Pendente</option>
-                    <option value="Parcelado">Parcelado</option>
-                </select><br>
-                <button type="submit">Cadastrar</button>
-            </form>
-        </div>
-        <div style="width: 50%;">
-            <h1>Transações</h1>
-            <input type="text" id="pesquisa" onkeyup="filtrarTransacoes()" placeholder="Pesquisar transações...">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Data</th>
-                        <th>Valor</th>
-                        <th>Categoria</th>
-                        <th>Descrição</th>
-                        <th>Método de Pagamento</th>
-                        <th>Recebedor ID</th>
-                        <th>Secretaria ID</th>
-                        <th>Guincho ID</th>
-                        <th>Motorista ID</th>
-                        <th>Status</th>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Cadastrar Transação</h1>
+                <form action="/cadastrar_transacao" method="post">
+                    <table class="table">
+                        <tr>
+                            <td><label for="data">Data:</label></td>
+                            <td><input type="date" id="data" name="data" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="valor">Valor:</label></td>
+                            <td><input type="number" id="valor" name="valor" step="0.01" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="categoria">Categoria:</label></td>
+                            <td><input type="text" id="categoria" name="categoria" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="descricao">Descrição:</label></td>
+                            <td><textarea id="descricao" name="descricao" required></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><label for="metodo_pagamento">Método de Pagamento:</label></td>
+                            <td>
+                                <select id="metodo_pagamento" name="metodo_pagamento" required>
+                                    <option value="Pix">Pix</option>
+                                    <option value="Cartão">Cartão</option>
+                                    <option value="Dinheiro">Dinheiro</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="status">Status:</label></td>
+                            <td>
+                                <select id="status" name="status" required>
+                                    <option value="Pago">Pago</option>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Parcelado">Parcelado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><label for="anexos">Anexos:</label></td>
+                            <td><input type="file" id="anexos" name="anexos[]" multiple required></td>
+                        </tr>
+        
+                            <td colspan="2"><button type="submit">Cadastrar</button></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- Exemplo de linha de transação -->
-                    <tr>
-                        <td>1</td>
-                        <td>2023-10-01</td>
-                        <td>150.00</td>
-                        <td>Serviço</td>
-                        <td>Guinchamento</td>
-                        <td>Pix</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>Pago</td>
-                    </tr>
-                    <!-- Mais linhas de transações aqui -->
-                </tbody>
-            </table>
+                    </table>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h1>Transações</h1>
+                <input type="text" id="pesquisa" onkeyup="filtrarTransacoes()" placeholder="Pesquisar transações...">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Categoria</th>
+                            <th>Descrição</th>
+                            <th>Método de Pagamento</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2023-10-01</td>
+                            <td>150.00</td>
+                            <td>Serviço</td>
+                            <td>Guinchamento</td>
+                            <td>Pix</td>
+                            <td>Pago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <script src="../statics/js/transacoes.js"></script>
+    <script src="../statics/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

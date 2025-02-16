@@ -3,7 +3,7 @@ from googleapiclient.discovery import build
 from typing import List, Optional, Dict, Tuple
 from datetime import datetime
 from googleapiclient.http import MediaFileUpload
-from BancoDados import BancoDados
+from GuinchoLacerda.classes.BancoDados import BancoDados
 import os
 import json
 
@@ -16,7 +16,7 @@ class GoogleDriveSheets:
     
     A estrutura será criada dinamicamente na pasta online “GuinchoLacerda” (cujo ID
     é fixo conforme o link fornecido). Nela serão salvos:
-      - Uma planilha global “Usuarios_Globais” com os dados de todos os usuários.
+      - Uma planilha global “usuarios” com os dados de todos os usuários.
       - Para cada secretária (filial):
            • Uma pasta "Filial – [Nome da Secretaria]"
                - Dentro dela, uma planilha "Filial – [Nome da Secretaria] – Dados" com 2 abas:
@@ -32,8 +32,8 @@ class GoogleDriveSheets:
         self.sheets_service = build('sheets', 'v4', credentials=self.creds)
         # ID fixo da pasta "GuinchoLacerda" (conforme link fornecido)
         self.id_pasta_principal = "1YXTazfxjcKE8rmv_nnF80pQZMIor8XKz"
-        # Cria ou recupera a planilha global "Usuarios_Globais"
-        self.id_planilha_global = self.obter_ou_criar_planilha("Usuarios_Globais", self.id_pasta_principal)
+        # Cria ou recupera a planilha global "usuarios"
+        self.id_planilha_global = self.obter_ou_criar_planilha("usuarios", self.id_pasta_principal)
         # Carrega as referências salvas (se existirem)
         self.referencias = self.carregar_referencias()
 
@@ -42,7 +42,7 @@ class GoogleDriveSheets:
         Autentica com a conta de serviço usando o arquivo JSON (ex.: service_account.json).
         """
         from google.oauth2.service_account import Credentials
-        return Credentials.from_service_account_file('lacerdaguinchos-8e2aeaf562ce.json', scopes=ESCOPOS)
+        return Credentials.from_service_account_file('../credenciais/lacerdaguinchos-8e2aeaf562ce.json', scopes=ESCOPOS)
 
     def carregar_referencias(self) -> Dict:
         """
@@ -139,9 +139,9 @@ class GoogleDriveSheets:
         arquivo = self.drive_service.files().create(body=metadata, media_body=media, fields='id').execute()
         print(f"Anexo '{novo_nome}' enviado para a pasta 'Anexos' (ID: {id_pasta_anexos}).")
 
-    def sincronizar_usuarios_globais(self, banco: BancoDados):
+    def sincronizar_usuarios(self, banco: BancoDados):
         """
-        Exporta todos os usuários para a planilha global “Usuarios_Globais”.
+        Exporta todos os usuários para a planilha global “usuarios”.
         """
         usuarios, cabecalhos = banco.obter_dados("SELECT * FROM usuarios", None)
         self.atualizar_planilha(self.id_planilha_global, "Usuarios", cabecalhos, usuarios)
@@ -234,6 +234,6 @@ class GoogleDriveSheets:
         Sincroniza a planilha global de usuários e as planilhas de cada filial.
         """
         print("Sincronizando planilha global de usuários...")
-        self.sincronizar_usuarios_globais(banco)
+        self.sincronizar_usuarios(banco)
         print("Sincronizando dados das filiais...")
         self.sincronizar_filiais(banco)

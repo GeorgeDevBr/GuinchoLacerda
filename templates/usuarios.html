@@ -2,81 +2,90 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../statics/css/custom.css">
     <title>Usuários</title>
-    <script>
-        function filtrarUsuarios() {
-            const input = document.getElementById('pesquisa');
-            const filter = input.value.toLowerCase();
-            const rows = document.querySelectorAll('table tbody tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                let match = false;
-                cells.forEach(cell => {
-                    if (cell.textContent.toLowerCase().includes(filter)) {
-                        match = true;
-                    }
-                });
-                row.style.display = match ? '' : 'none';
-            });
-        }
-    </script>
 </head>
 <body>
-    <div style="display: flex;">
-        <div style="width: 50%;">
-            <h1>Cadastrar Usuário</h1>
-            <form action="/cadastrar_usuario" method="post">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" required><br>
-                <label for="tipo">Tipo:</label>
-                <select id="tipo" name="tipo" required>
-                    <option value="Administrador">Administrador</option>
-                    <option value="Secretaria">Secretaria</option>
-                    <option value="Motorista">Motorista</option>
-                </select><br>
-                <label for="cnh">CNH:</label>
-                <input type="text" id="cnh" name="cnh"><br>
-                <label for="celular">Celular:</label>
-                <input type="text" id="celular" name="celular" required><br>
-                <label for="justificativa">Justificativa:</label>
-                <textarea id="justificativa" name="justificativa"></textarea><br>
-                <button type="submit">Cadastrar</button>
-            </form>
-        </div>
-        <div style="width: 50%;">
-            <h1>Usuários</h1>
-            <input type="text" id="pesquisa" onkeyup="filtrarUsuarios()" placeholder="Pesquisar usuários...">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Tipo</th>
-                        <th>CNH</th>
-                        <th>Celular</th>
-                        <th>Justificativa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Exemplo de linha de usuário -->
-                    <tr>
-                        <td>1</td>
-                        <td>João Silva</td>
-                        <td>joao@empresa.com</td>
-                        <td>Motorista</td>
-                        <td>123456789</td>
-                        <td>(11) 91234-5678</td>
-                        <td>Justificativa exemplo</td>
-                    </tr>
-                    <!-- Mais linhas de usuários aqui -->
-                </tbody>
-            </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Cadastrar Usuário</h1>
+                <form action="/cadastrar_usuario" method="post">
+                    <table class="table">
+                        <tr>
+                            <td><label for="nome">Nome:</label></td>
+                            <td><input type="text" id="nome" name="nome" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email:</label></td>
+                            <td><input type="email" id="email" name="email" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="senha">Senha:</label></td>
+                            <td><input type="password" id="senha" name="senha" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="tipo">Tipo:</label></td>
+                            <td>
+                                <select id="tipo" name="tipo" required>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Secretaria">Secretaria</option>
+                                    <option value="Motorista">Motorista</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="cnh">CNH:</label></td>
+                            <td><input type="text" id="cnh" name="cnh"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="celular">Celular:</label></td>
+                            <td><input type="text" id="celular" name="celular" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="justificativa">Justificativa:</label></td>
+                            <td><textarea id="justificativa" name="justificativa"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button type="submit">Cadastrar</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h1>Usuários</h1>
+                <input type="text" id="pesquisa" onkeyup="filtrarUsuarios()" placeholder="Pesquisar usuários...">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <th>CNH</th>
+                            <th>Celular</th>
+                            <th>Justificativa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Exemplo de linha de usuário -->
+                        <tr>
+                            <td>1</td>
+                            <td>João Silva</td>
+                            <td>joao@empresa.com</td>
+                            <td>Motorista</td>
+                            <td>123456789</td>
+                            <td>(11) 91234-5678</td>
+                            <td>Justificativa exemplo</td>
+                        </tr>
+                        <!-- Mais linhas de usuários aqui -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <script src="../statics/js/usuarios.js"></script>
+    <script src="../statics/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
